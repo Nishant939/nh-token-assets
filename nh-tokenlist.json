@@ -1,0 +1,19 @@
+{
+  "name": "NH Token List",
+  "timestamp": "2025-07-21T10:00:00+00:00",
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  },
+  "tokens": [
+    {
+      "chainId": 137,
+      "address": "0xd9145CCE52D386f254917e481eB44e9943F39138",
+      "name": "NH Token",
+      "symbol": "NH",
+      "decimals": 18,
+      "logoURI": "https://ipfs.io/ipfs/bafkreiencjqgfzbbqmbahjiu24hpbm7de2z3xhkdcc6f23tsbodderjmma"
+    }
+  ]
+}
