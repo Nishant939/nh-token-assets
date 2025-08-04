@@ -1,0 +1,14 @@
+{
+  "name": "NH Token List",
+  "logoURI": "/logo.png",
+  "tokens": [
+    {
+      "chainId": 137,
+      "address": "0xf930cf4150f7cb1108b30df610f07188fd794398",
+      "symbol": "NH",
+      "name": "NH Token",
+      "decimals": 18,
+      "logoURI": "/logo.png"
+    }
+  ]
+}
