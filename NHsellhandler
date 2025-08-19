@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>NH Token Interaction</title>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 40px;
+            background-color: #f4f4f4;
+        }
+        input, button {
+            padding: 10px;
+            margin: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2>NH Token Interaction</h2>
+
+    <button id="connectButton">Connect Wallet</button>
+    <br><br>
+    
+    <input type="text" id="addressInput" placeholder="Enter wallet address" size="42">
+    <button id="checkBalanceButton">Check Balance</button>
+
+    <p id="balanceOutput"></p>
+
+    <script>
+        const contractAddress = "YOUR_CONTRACT_ADDRESS"; // Replace with your NH Token address
+        const contractABI = [ 
+            // Replace this with your token ABI
+            "function balanceOf(address) view returns (uint256)",
+            "function symbol() view returns (string)"
+        ];
+
+        let provider, signer, contract;
+
+        async function connectWallet() {
+            if (window.ethereum) {
+                try {
+                    await ethereum.request({ method: "eth_requestAccounts" });
+                    provider = new ethers.providers.Web3Provider(window.ethereum);
+                    signer = provider.getSigner();
+                    contract = new ethers.Contract(contractAddress, contractABI, provider);
+                    alert("Wallet connected!");
+                } catch (err) {
+                    console.error(err);
+                }
+            } else {
+                alert("Please install MetaMask!");
+            }
+        }
+
+        async function checkBalance() {
+            const address = document.getElementById("addressInput").value;
+            if (!address) return alert("Please enter an address");
+            try {
+                const balance = await contract.balanceOf(address);
+                const symbol = await contract.symbol();
+                document.getElementById("balanceOutput").innerText =
+                    `Balance: ${ethers.utils.formatUnits(balance, 18)} ${symbol}`;
+            } catch (err) {
+                console.error(err);
+                alert("Error fetching balance");
+            }
+        }
+
+        document.getElementById("connectButton").addEventListener("click", connectWallet);
+        document.getElementById("checkBalanceButton").addEventListener("click", checkBalance);
+    </script>
+</body>
+</html>
